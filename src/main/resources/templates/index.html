@@ -1,0 +1,16 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+  <title>Spring Boot CRUD Example</title>
+	<link href="../css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div style="margin-bottom:10px">
+			<a th:href="@{/authors}" class="btn btn-success"><span>Show Author List</span></a>
+			<a th:href="@{/publishers}" class="btn btn-success"><span>Show Publisher List</span></a>
+			<a th:href="@{/books}" class="btn btn-success"><span>Show Book List</span></a>
+		</div>
+	</div>
+</body>
+</html>

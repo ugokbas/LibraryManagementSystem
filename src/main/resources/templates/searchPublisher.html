@@ -1,0 +1,111 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <title>Spring Boot CRUD Example</title>
+    <link href="../css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="panel-footer">
+        <a th:href="@{/}" class="btn btn-success">Back To Main Menu</a>
+    </div>
+    <div class="row"  style="margin-bottom:50px;">
+        <div class="col-md-offset-2 col-md-8">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">All Publishers</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr class="btn-success">
+                            <th>Publisher Name</th>
+                            <th>Explanation</th>
+                            <th>Operation</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${#lists.isEmpty(allPublishers)}" class="btn-warning">
+                            <td colspan="4" align="center">No Publisher Info Registered Yet!!!</td>
+                        </tr>
+                        <tr th:each="pub : ${allPublishers}">
+                            <td th:text="${pub.pubName}"></td>
+                            <td th:text="${pub.explanation}"></td>
+                            <td align="center">
+                                <a th:href="@{/publisher/edit/{id}(id=${pub.id})}"><span>Update</span></a> &nbsp  &nbsp;
+                                <a th:href="@{/publisher/delete/{id}(id=${pub.id})}"><span>Delete</span></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+
+            <!-- Save Alert Messages -->
+            <div th:if="${savePublisher eq 'unsuccess'}">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <strong>Error!</strong> Publisher Data Not Saved.
+                </div>
+            </div>
+            <div th:if="${savePublisher eq 'success'}">
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <strong>Success!</strong> Publisher Data Saved Successfully.
+                </div>
+            </div>
+
+            <!-- Deletion Alert Messages -->
+            <div th:if="${deletion eq 'unsuccess'}">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <strong>Error!</strong> Publisher Data Not Deleted.
+                </div>
+            </div>
+            <div th:if="${deletion eq 'success'}">
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <strong>Success!</strong> Publisher Data Deleted Successfully.
+                </div>
+            </div>
+
+            <!-- Edit Alert Message -->
+            <div th:if="${status eq 'notfound'}">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <strong>Error!</strong> Invalid Publisher.
+                </div>
+            </div>
+            <div th:if="${edit eq 'unsuccess'}">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <strong>Error!</strong> Publisher Data Not Edited.
+                </div>
+            </div>
+            <div th:if="${edit eq 'success'}">
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <strong>Success!</strong> Publisher Data Edited Successfully.
+                </div>
+            </div>
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Add Publisher</h3>
+                </div>
+                <div class="panel-body">
+                    <form th:object="${publisher}" th:action="@{/publisher/save}" action="#" method="post">
+                        <input type="text" th:field="*{pubName}" class="form-control" placeholder="Publisher Name"
+                               required/>
+                        <div style="clear:both; display:block;height:10px;"></div>
+                        <input type="text" th:field="*{explanation}" class="form-control"
+                               placeholder="Explanation" required/>
+                        <div style="clear:both; display:block;height:10px;"></div>
+                        <input type="submit" class="btn btn-danger pull-right" value="Save">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

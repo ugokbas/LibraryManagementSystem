@@ -1,0 +1,50 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+    <title>Spring Boot CRUD Example</title>
+    <link href="../css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6">
+
+                <div th:if="${saveAuthor eq 'unsuccess'}">
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <strong>Error!</strong> Author Data Not Updated.
+                    </div>
+                </div>
+                <div th:if="${saveAuthor eq 'success'}">
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <strong>Success!</strong> Author Data Updated Successfully.
+                    </div>
+                </div>
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Edit Author</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form th:object="${editAuthor}" th:action="@{/author/update}" action="#" method="post">
+                            <input type="hidden" th:field="*{id}"/>
+                            <input type="text" th:field="*{autName}" class="form-control" placeholder="Author Name"/>
+                            <div style="clear:both; display:block;height:10px;"></div>
+                            <input type="text" th:field="*{explanation}" class="form-control" placeholder="Explanation"/>
+                            <div style="clear:both; display:block;height:10px;"></div>
+                            <input type="submit" class="btn btn-danger pull-right" value="Update">
+                        </form>
+                    </div>
+
+                    <div class="panel-footer">
+                        <a th:href="@{/authors}" class="btn btn-success">Back To Save Page</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

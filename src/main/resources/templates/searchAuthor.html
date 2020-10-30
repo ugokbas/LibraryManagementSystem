@@ -1,0 +1,111 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+  <title>Spring Boot CRUD Example</title>
+	<link href="../css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="panel-footer">
+			<a th:href="@{/}" class="btn btn-success">Back To Main Menu</a>
+		</div>
+		<div class="row"  style="margin-bottom:50px;">
+			<div class="col-md-offset-2 col-md-8">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h3 class="panel-title">All Authors</h3>
+					</div>
+					<div class="panel-body">
+						<table class="table table-bordered">
+							<thead>
+							<tr class="btn-success">
+								<th>Author Name</th>
+								<th>Explanation</th>
+								<th>Operation</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr th:if="${#lists.isEmpty(allAuthors)}" class="btn-warning">
+								<td colspan="4" align="center">No Author Info Registered Yet!!!</td>
+							</tr>
+							<tr th:each="aut : ${allAuthors}">
+								<td th:text="${aut.autName}"></td>
+								<td th:text="${aut.Explanation}"></td>
+								<td align="center">
+									<a th:href="@{/author/edit/{id}(id=${aut.id})}"><span>Update</span></a> &nbsp  &nbsp;
+									<a th:href="@{/author/delete/{id}(id=${aut.id})}"><span>Delete</span></a>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		   <div class="row">
+		      <div class="col-md-offset-3 col-md-6">
+		         
+		          <!-- Save Alert Messages -->
+			           <div th:if="${saveAuthor eq 'unsuccess'}">
+			              <div class="alert alert-danger alert-dismissible" role="alert">
+							  <strong>Error!</strong> Author Data Not Saved.
+							</div>
+			           </div>
+			           <div th:if="${saveAuthor eq 'success'}">
+			              <div class="alert alert-success alert-dismissible" role="alert">
+							  <strong>Success!</strong> Author Data Saved Successfully.
+						  </div>
+			           </div>
+		           
+		           <!-- Deletion Alert Messages -->
+				       <div th:if="${deletion eq 'unsuccess'}">
+			              <div class="alert alert-danger alert-dismissible" role="alert">
+							  <strong>Error!</strong> Author Data Not Deleted.
+							</div>
+			           </div>
+			           <div th:if="${deletion eq 'success'}">
+			              <div class="alert alert-success alert-dismissible" role="alert">
+							  <strong>Success!</strong> Author Data Deleted Successfully.
+							</div>
+			           </div>
+			       
+			       <!-- Edit Alert Message -->
+			        <div th:if="${status eq 'notfound'}">
+			              <div class="alert alert-danger alert-dismissible" role="alert">
+							  <strong>Error!</strong> Invalid Author.
+							</div>
+			           </div>
+			           <div th:if="${edit eq 'unsuccess'}">
+			              <div class="alert alert-danger alert-dismissible" role="alert">
+							  <strong>Error!</strong> Author Data Not Edited.
+							</div>
+			           </div>
+			           <div th:if="${edit eq 'success'}">
+			              <div class="alert alert-success alert-dismissible" role="alert">
+							  <strong>Success!</strong> Author Data Edited Successfully.
+							</div>
+			           </div>
+
+				  <div class="panel panel-success">
+					  <div class="panel-heading">
+						  <h3 class="panel-title">Add Author</h3>
+					  </div>
+					  <div class="panel-body">
+						  <form th:object="${author}" th:action="@{/author/save}" action="#" method="post">
+							  <input type="text" th:field="*{autName}" class="form-control" placeholder="Author Name"
+									 required/>
+							  <div style="clear:both; display:block;height:10px;"></div>
+							  <input type="text" th:field="*{explanation}" class="form-control"
+									 placeholder="Explanation" required/>
+							  <div style="clear:both; display:block;height:10px;"></div>
+							  <input type="submit" class="btn btn-danger pull-right" value="Save">
+						  </form>
+					  </div>
+				  </div>
+		      </div>
+		   </div>
+		</div>
+</body>
+</html>
