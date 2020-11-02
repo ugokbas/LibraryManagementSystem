@@ -6,10 +6,6 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<div class="panel-footer" style="margin-bottom:20px;">
-			<a th:href="@{/}" class="btn btn-success">Back To Main Menu</a>
-		</div>
-
 		<form th:action="@{/authors}" method="get" class="form-inline" style="margin-bottom:10px">
 			<input id="txtSearch" class="form-control" style="margin-right:5px" type="text" name="keyword" placeholder="Author Name">
 			<button type="submit" class="btn btn-success">Search</button>
@@ -92,6 +88,10 @@
 							  <strong>Success!</strong> Author Data Edited Successfully.
 							</div>
 			           </div>
+
+				  <div class="panel-footer" style="margin-bottom:20px;">
+					  <a th:href="@{/}" class="btn btn-success">Back To Main Menu</a>
+				  </div>
 
 				  <div class="panel panel-success">
 					  <div class="panel-heading">

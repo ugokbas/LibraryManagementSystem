@@ -6,10 +6,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="panel-footer">
-        <a th:href="@{/}" class="btn btn-success">Back To Main Menu</a>
-    </div>
-    <div class="row"  style="margin-bottom:50px;">
+    <div class="row"  style="margin-bottom:20px;">
         <div class="col-md-offset-2 col-md-8">
             <div class="panel panel-success">
                 <div class="panel-heading">
@@ -85,6 +82,10 @@
                 <div class="alert alert-success alert-dismissible" role="alert">
                     <strong>Success!</strong> Publisher Data Edited Successfully.
                 </div>
+            </div>
+
+            <div class="panel-footer" style="margin-bottom:20px">
+                <a th:href="@{/}" class="btn btn-success">Back To Main Menu</a>
             </div>
 
             <div class="panel panel-success">

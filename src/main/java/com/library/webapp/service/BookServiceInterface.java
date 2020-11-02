@@ -1,5 +1,6 @@
 package com.library.webapp.service;
 
+import com.library.webapp.domain.Author;
 import com.library.webapp.domain.Book;
 import java.util.Collection;
 import java.util.List;
@@ -13,4 +14,5 @@ public interface BookServiceInterface {
     public Book findBook(String bookId);
     public Collection<Book> getAllBooks();
     public List<Book> getBooksByName(String name);
+    public List<Book> findByKeyword(String keyword);
 }

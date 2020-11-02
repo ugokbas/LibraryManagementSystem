@@ -1,5 +1,6 @@
 package com.library.webapp.service;
 
+import com.library.webapp.domain.Author;
 import com.library.webapp.domain.Book;
 import com.library.webapp.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,10 @@ public class BookServiceImplementation implements BookServiceInterface {
 
     @Autowired
     protected BookRepository bookRepository;
+
+    public List<Book> findByKeyword(String keyword) {
+        return bookRepository.findByKeyword(keyword);
+    }
 
     @Override
     public Book saveBook(Book book) {

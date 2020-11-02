@@ -6,10 +6,13 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="panel-footer">
-        <a th:href="@{/}" class="btn btn-success">Back To Main Menu</a>
-    </div>
-    <div class="row"  style="margin-bottom:50px;">
+    <form th:action="@{/books}" method="get" class="form-inline" style="margin-bottom:10px">
+        <input id="txtSearch" class="form-control" style="margin-right:5px" type="text" name="keyword"
+               placeholder="Book,Author or Book Series Name, ISBN">
+        <button type="submit" class="btn btn-success">Search</button>
+    </form>
+
+    <div class="row"  style="margin-bottom:20px;">
         <div class="col-md-offset-2 col-md-8">
             <div class="panel panel-success">
                 <div class="panel-heading">
@@ -31,7 +34,7 @@
                         </thead>
                         <tbody>
                         <tr th:if="${#lists.isEmpty(allBooks)}" class="btn-warning">
-                            <td colspan="4" align="center">No Book Info Registered Yet!!!</td>
+                            <td colspan="8" align="center">No Book Info Registered Yet!!!</td>
                         </tr>
                         <tr th:each="book : ${allBooks}">
                             <td th:text="${book.bookName}"></td>
@@ -98,9 +101,13 @@
                 </div>
             </div>
 
+            <div class="panel-footer" style="margin-bottom:20px">
+                <a th:href="@{/}" class="btn btn-success">Back To Main Menu</a>
+            </div>
+
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Search Book</h3>
+                    <h3 class="panel-title">Add Book</h3>
                 </div>
                 <div class="panel-body">
                     <form th:object="${book}" th:action="@{/book/save}" action="#" method="post">

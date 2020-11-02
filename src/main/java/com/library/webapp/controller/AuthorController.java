@@ -1,8 +1,6 @@
 package com.library.webapp.controller;
 
 import com.library.webapp.domain.Author;
-import com.library.webapp.repository.AuthorRepository;
-import com.library.webapp.service.AuthorServiceImplementation;
 import com.library.webapp.service.AuthorServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,7 +22,7 @@ public class AuthorController {
 
 
     @GetMapping("/authors")
-    public String savePage(Model model, String keyword) {
+    public String listAuthorPage(Model model, String keyword) {
         model.addAttribute("author", new Author());
 
         if(keyword != null){
@@ -84,10 +82,11 @@ public class AuthorController {
         return "redirect:/authors";
     }
 
-    @RequestMapping(value = "/author/findByName/{authorName}", method = RequestMethod.GET)
-    public String findByAuthorName(@PathVariable("authorName") String authorName,
-                                     final RedirectAttributes redirectAttributes) {
-        List<Author> author = authorServiceInterface.getAuthorsByName(authorName);
-        return "redirect:/";
-    }
+    // Ctrl + *
+//    @RequestMapping(value = "/author/findByName/{authorName}", method = RequestMethod.GET)
+//    public String findByAuthorName(@PathVariable("authorName") String authorName,
+//                                     final RedirectAttributes redirectAttributes) {
+//        List<Author> author = authorServiceInterface.getAuthorsByName(authorName);
+//        return "redirect:/";
+//    }
 }

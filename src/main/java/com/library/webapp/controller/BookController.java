@@ -1,5 +1,6 @@
 package com.library.webapp.controller;
 
+import com.library.webapp.domain.Author;
 import com.library.webapp.domain.Book;
 import com.library.webapp.service.BookServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,15 @@ public class BookController {
     BookServiceInterface bookServiceInterface;
 
     @GetMapping("/books")
-    public String savePage(Model model) {
+    public String listBookPage(Model model, String keyword) {
         model.addAttribute("book", new Book());
-        model.addAttribute("allBooks", (ArrayList<Book>)bookServiceInterface.getAllBooks());
+
+        if(keyword != null){
+            model.addAttribute("allBooks", bookServiceInterface.findByKeyword(keyword.toUpperCase()));
+        }
+        else {
+            model.addAttribute("allBooks", (ArrayList<Book>) bookServiceInterface.getAllBooks());
+        }
         return "searchBook";
     }
 
@@ -71,7 +78,6 @@ public class BookController {
         } else {
             redirectAttributes.addFlashAttribute("edit", "unsuccess");
         }
-//		return "redirect:/savepage";
         return "redirect:/books";
     }
 

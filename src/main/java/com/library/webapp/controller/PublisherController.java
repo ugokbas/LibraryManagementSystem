@@ -71,14 +71,13 @@ public class PublisherController {
         } else {
             redirectAttributes.addFlashAttribute("edit", "unsuccess");
         }
-//		return "redirect:/savepage";
         return "redirect:/publishers";
     }
 
-    @RequestMapping(value = "/publisher/findByName/{publisherName}", method = RequestMethod.GET)
-    public String findByPublisherName(@PathVariable("publisherName") String publisherName,
-                                     final RedirectAttributes redirectAttributes) {
-        List<Publisher> publishers = publisherServiceInterface.getPublishersByName(publisherName);
-        return "redirect:/";
-    }
+//    @RequestMapping(value = "/publisher/findByName/{publisherName}", method = RequestMethod.GET)
+//    public String findByPublisherName(@PathVariable("publisherName") String publisherName,
+//                                     final RedirectAttributes redirectAttributes) {
+//        List<Publisher> publishers = publisherServiceInterface.getPublishersByName(publisherName);
+//        return "redirect:/";
+//    }
 }
