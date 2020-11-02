@@ -13,4 +13,5 @@ public interface AuthorServiceInterface {
     public Author findAuthor(String autId);
     public Collection<Author> getAllAuthors();
     public List<Author> getAuthorsByName(String name);
+    public List<Author> findByKeyword(String keyword);
 }

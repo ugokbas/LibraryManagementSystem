@@ -1,6 +1,8 @@
 package com.library.webapp.controller;
 
 import com.library.webapp.domain.Author;
+import com.library.webapp.repository.AuthorRepository;
+import com.library.webapp.service.AuthorServiceImplementation;
 import com.library.webapp.service.AuthorServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,10 +22,17 @@ public class AuthorController {
     @Autowired
     AuthorServiceInterface authorServiceInterface;
 
+
     @GetMapping("/authors")
-    public String savePage(Model model) {
+    public String savePage(Model model, String keyword) {
         model.addAttribute("author", new Author());
-        model.addAttribute("allAuthors", (ArrayList<Author>)authorServiceInterface.getAllAuthors());
+
+        if(keyword != null){
+            model.addAttribute("allAuthors", authorServiceInterface.findByKeyword(keyword.toUpperCase()));
+        }
+        else {
+            model.addAttribute("allAuthors", (ArrayList<Author>) authorServiceInterface.getAllAuthors());
+        }
         return "searchAuthor";
     }
 

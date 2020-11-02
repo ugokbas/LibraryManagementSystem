@@ -6,10 +6,16 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<div class="panel-footer">
+		<div class="panel-footer" style="margin-bottom:20px;">
 			<a th:href="@{/}" class="btn btn-success">Back To Main Menu</a>
 		</div>
-		<div class="row"  style="margin-bottom:50px;">
+
+		<form th:action="@{/authors}" method="get" class="form-inline" style="margin-bottom:10px">
+			<input id="txtSearch" class="form-control" style="margin-right:5px" type="text" name="keyword" placeholder="Author Name">
+			<button type="submit" class="btn btn-success">Search</button>
+		</form>
+
+		<div class="row"  style="margin-bottom:20px;">
 			<div class="col-md-offset-2 col-md-8">
 				<div class="panel panel-success">
 					<div class="panel-heading">
@@ -39,7 +45,6 @@
 							</tbody>
 						</table>
 					</div>
-
 				</div>
 			</div>
 		</div>

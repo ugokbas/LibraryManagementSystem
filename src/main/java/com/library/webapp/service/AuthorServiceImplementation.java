@@ -18,6 +18,10 @@ public class AuthorServiceImplementation implements AuthorServiceInterface {
     @Autowired
     protected AuthorRepository authorRepository;
 
+    public List<Author> findByKeyword(String keyword) {
+        return authorRepository.findByKeyword(keyword);
+    }
+
     @Override
     public Author saveAuthor(Author aut) {
         // TODO Auto-generated method stub
@@ -53,10 +57,10 @@ public class AuthorServiceImplementation implements AuthorServiceInterface {
         return authorRepository.findByAutName(name);
     }
 
+
     @Override
     public Author findAuthor(String autId) {
         return authorRepository.findById(autId).get();
     }
-
 
 }
